@@ -37,6 +37,10 @@ export default class MyGameEngine extends GameEngine {
                 this.paddle1 = object;
             } else if (object.playerId === 2) {
                 this.paddle2 = object;
+            } else if (object.playerId === 3) {
+                this.paddle3 = object;
+            } else if (object.playerId === 4) {
+                this.paddle4 = object;
             }
         });
     }
@@ -46,6 +50,8 @@ export default class MyGameEngine extends GameEngine {
         // create the paddle objects
         this.addObjectToWorld(new Paddle(this, null, { position: new TwoVector(PADDING, 0), playerId: 1 }));
         this.addObjectToWorld(new Paddle(this, null, { position: new TwoVector(WIDTH - PADDING, 0), playerId: 2 }));
+        this.addObjectToWorld(new Paddle(this, null, { position: new TwoVector(PADDING, 0), playerId: 3 }));
+        this.addObjectToWorld(new Paddle(this, null, { position: new TwoVector(WIDTH - PADDING, 0), playerId: 4 }));
         this.addObjectToWorld(new Ball(this, null, { position: new TwoVector(WIDTH /2, HEIGHT / 2) }));
     }
 
@@ -55,10 +61,10 @@ export default class MyGameEngine extends GameEngine {
 
         // CHECK LEFT EDGE:
         if (this.ball.position.x <= PADDING + PADDLE_WIDTH &&
-            this.ball.position.y >= this.paddle1.y && this.ball.position.y <= this.paddle1.position.y + PADDLE_HEIGHT &&
+            this.ball.position.y >= this.paddle1.y && this.paddle3.y && this.ball.position.y <= this.paddle1.position.y && this.paddle3.position.y + PADDLE_HEIGHT &&
             this.ball.velocity.x < 0) {
 
-            // ball moving left hit player 1 paddle
+            // ball moving left hit team 1 paddle
             this.ball.velocity.x *= -1;
             this.ball.position.x = PADDING + PADDLE_WIDTH + 1;
         } else if (this.ball.position.x <= 0) {
@@ -66,15 +72,15 @@ export default class MyGameEngine extends GameEngine {
             // ball hit left wall
             this.ball.velocity.x *= -1;
             this.ball.position.x = 0;
-            console.log(`player 2 scored`);
+            console.log(`team 2 scored`);
         }
 
         // CHECK RIGHT EDGE:
         if (this.ball.position.x >= WIDTH - PADDING - PADDLE_WIDTH &&
-            this.ball.position.y >= this.paddle2.position.y && this.ball.position.y <= this.paddle2.position.y + PADDLE_HEIGHT &&
+            this.ball.position.y >= this.paddle2.position.y && this.paddle4.position.y && this.ball.position.y <= this.paddle2.position.y && this.paddle4.position.y + PADDLE_HEIGHT &&
             this.ball.velocity.x > 0) {
 
-            // ball moving right hits player 2 paddle
+            // ball moving right hits team 2 paddle
             this.ball.velocity.x *= -1;
             this.ball.position.x = WIDTH - PADDING - PADDLE_WIDTH - 1;
         } else if (this.ball.position.x >= WIDTH ) {
@@ -82,7 +88,7 @@ export default class MyGameEngine extends GameEngine {
             // ball hit right wall
             this.ball.velocity.x *= -1;
             this.ball.position.x = WIDTH - 1;
-            console.log(`player 1 scored`);
+            console.log(`team 1 scored`);
         }
 
         // ball hits top

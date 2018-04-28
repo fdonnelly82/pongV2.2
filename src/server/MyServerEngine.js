@@ -16,7 +16,9 @@ export default class MyServerEngine extends ServerEngine {
 
         this.players = {
             player1: null,
-            player2: null
+            player2: null,
+            player3: null,
+            player4: null
         };
     }
 
@@ -30,6 +32,12 @@ export default class MyServerEngine extends ServerEngine {
         } else if (this.players.player2 === null) {
             this.players.player2 = socket.id;
             this.gameEngine.paddle2.playerId = socket.playerId;
+        } else if(this.players.player3 === null){
+            this.players.player3 = socket.id;
+            this.gameEngine.paddle3.playerId = socket.playerId;
+        } else if(this.players.player4 === null){
+            this.players.player4 = socket.id;
+            this.gameEngine.paddle4.playerId = socket.playerId;
         }
     }
 
@@ -42,6 +50,12 @@ export default class MyServerEngine extends ServerEngine {
         } else if (this.players.player2 == socketId) {
             console.log('Player 2 disconnected');
             this.players.player2 = null;
+        } else if (this.players.player3 == socketId){
+            console.log('Player 3 disconnected');
+            this.players.player3 = null;
+        } else if (this.players.player4 == socketId){
+            console.log('Player 4 disconnected');
+            this.players.player4 = null;
         }
     }
 }
