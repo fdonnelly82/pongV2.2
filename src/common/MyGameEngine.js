@@ -29,6 +29,7 @@ export default class MyGameEngine extends GameEngine {
 
         super.start();
 
+        //assigns newly joined players to player number
         this.on('postStep', () => { this.postStepHandleBall(); });
         this.on('objectAdded', (object) => {
             if (object.class === Ball) {

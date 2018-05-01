@@ -44,6 +44,7 @@ export default class MyServerEngine extends ServerEngine {
     onPlayerDisconnected(socketId, playerId) {
         super.onPlayerDisconnected(socketId, playerId);
 
+        //disconects the player if they close the browser window
         if (this.players.player1 == socketId) {
             console.log('Player 1 disconnected');
             this.players.player1 = null;

@@ -12,6 +12,7 @@ export default class MyRenderer extends Renderer {
     draw(t, dt) {
         super.draw(t, dt);
 
+        //possitions the objects in the pannel
         for (let objId of Object.keys(this.sprites)) {
             if (this.sprites[objId].el) {
                 this.sprites[objId].el.style.top = this.gameEngine.world.objects[objId].position.y + 'px';
@@ -20,6 +21,7 @@ export default class MyRenderer extends Renderer {
         }
     }
 
+    //adds the pre made paddle sprite
     addSprite(obj, objName) {
         if (objName === 'paddle') objName += obj.playerId;
         this.sprites[obj.id] = {
